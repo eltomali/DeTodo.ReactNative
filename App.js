@@ -1,24 +1,26 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import {createStore} from 'redux'; 
-import rootReducer from './redux/reducers';
 import { Provider } from 'react-redux';
+import {store, persistor} from './redux/store'
+import { PersistGate } from 'redux-persist/integration/react'
+
 
 import AddTodo from './components/AddTodo';
 import TodoList from './components/TodoList';
 
-const store = createStore(rootReducer);
 
 export default function App() {
 
   return (
     <Provider store={store}>
-      <View style={styles.container}>
-        <StatusBar style="auto" />
-        <AddTodo />
-        <TodoList />
-      </View>
+      <PersistGate loading={null} persistor={persistor}>
+        <View style={styles.container}>
+          <StatusBar style="auto" />
+          <AddTodo />
+          <TodoList />
+        </View>
+      </PersistGate>
     </Provider>
   );
 }
