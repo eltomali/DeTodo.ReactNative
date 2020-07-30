@@ -9,14 +9,14 @@ import {
 } from "react-native";
 import TodoList from "../TodoList";
 
-export default function MainScreen() {
+const MainScreen = (props) => {
   return (
     <View style={styles.container}>
       <View style={styles.title}>
         <Text>My Todos</Text>
       </View>
       <View style={styles.todos}>
-        <TodoList />
+        <TodoList navigation={props.navigation} />
       </View>
     </View>
   );
@@ -35,6 +35,8 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 });
+
+export default MainScreen;
 
 export const screenOptions = (navData) => {
   return {
