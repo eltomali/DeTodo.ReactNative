@@ -6,8 +6,9 @@ import {store, persistor} from './redux/store'
 import { PersistGate } from 'redux-persist/integration/react'
 
 
-import AddTodo from './components/AddTodo';
+
 import TodoList from './components/TodoList';
+import { TodoNavigator } from './navigation';
 
 
 export default function App() {
@@ -17,8 +18,7 @@ export default function App() {
       <PersistGate loading={null} persistor={persistor}>
         <View style={styles.container}>
           <StatusBar style="auto" />
-          <AddTodo />
-          <TodoList />
+          <TodoNavigator />
         </View>
       </PersistGate>
     </Provider>
@@ -28,9 +28,8 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 40
+    // alignItems: 'center',
+    // justifyContent: 'center',
+    // marginTop: 40
   },
 });

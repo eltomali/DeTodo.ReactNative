@@ -1,25 +1,27 @@
 import React, { useState } from "react";
 import { TextInput, View, Button, StyleSheet } from "react-native";
 import { useDispatch } from "react-redux";
-import { addTodo } from "../redux/actions";
+import { addTodo } from "../../redux/actions";
 
-const AddTodo = () => {
+const AddTodo = ({navigation}) => {
   const [input, setInput] = useState("");
   const dispatch = useDispatch();
   const buttonHandler = () => {
     if (input === "") return;
     dispatch(addTodo(input));
     setInput("");
+    navigation.goBack();
   };
   return (
     <View style={styles.container}>
       <TextInput
         value={input}
         onChangeText={setInput}
-        backgroundColor="white"
-        width="80%"
+        placeholder="Write your todo here"
       />
-      <Button title="Add Todo" onPress={buttonHandler} />
+      <View style={styles.addButton}>
+        <Button title="Add Todo" onPress={buttonHandler} />
+      </View>
     </View>
   );
 };
@@ -28,10 +30,10 @@ export default AddTodo;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "grey",
-    alignItems: "center",
-    justifyContent: "center",
-    width: "100%",
-    height: 100,
+    marginTop: 30, 
+    marginHorizontal: 30
   },
+  addButton: {
+    marginTop: 20
+  }
 });
