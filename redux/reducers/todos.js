@@ -12,7 +12,6 @@ function todos(state = [], action) {
         {
           id: action.id,
           todo: action.todo,
-          completed: false,
         },
       ];
     case DELETE_TODO :

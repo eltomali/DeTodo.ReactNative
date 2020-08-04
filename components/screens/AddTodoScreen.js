@@ -7,7 +7,7 @@ const AddTodo = ({navigation}) => {
   const [input, setInput] = useState("");
   const dispatch = useDispatch();
   const buttonHandler = () => {
-    if (input === "") return;
+    if (!input) return;
     dispatch(addTodo(input));
     setInput("");
     navigation.goBack();
