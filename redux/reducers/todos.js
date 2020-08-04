@@ -1,6 +1,7 @@
 import {
   ADD_TODO,
   DELETE_TODO,
+  UPDATE_TODO
 } from "../actions";
 
 
@@ -16,6 +17,17 @@ function todos(state = [], action) {
       ];
     case DELETE_TODO :
       return state.filter((todo) => todo.id !== action.id);
+    case UPDATE_TODO : 
+      return state.map(todo => { 
+        if (todo.id !== action.id) {
+          return todo;
+        }
+        return {
+          id: action.id,
+          todo: action.todo
+        }
+      })
+      
     default:
       return state;
   }
