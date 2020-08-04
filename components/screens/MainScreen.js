@@ -3,8 +3,6 @@ import {
   StyleSheet,
   Text,
   View,
-  TouchableOpacity,
-  Dimensions,
   Button,
 } from "react-native";
 import TodoList from "../TodoList";

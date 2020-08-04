@@ -1,13 +1,9 @@
 import React from "react";
 import { FlatList, Text, TouchableOpacity } from "react-native";
-
-import Todo from "./Todo";
-import { useSelector, useDispatch } from "react-redux";
-import { deleteTodo } from "../redux/actions";
+import { useSelector } from "react-redux";
 
 const TodoList = (props) => {
   const todos = useSelector((state) => state.todos);
-  console.log({todos})
   return (
     <FlatList
       style={{ width: "80%" }}
