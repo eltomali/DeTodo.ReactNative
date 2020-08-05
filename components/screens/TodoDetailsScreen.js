@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import { StyleSheet, View, TextInput, Button } from "react-native";
 import { useDispatch } from "react-redux";
-import { deleteTodo, updateTodo } from "../../redux/actions";
+import { deleteTodoAction, updateTodoAction } from "../../redux/actions";
 
 const TodoDetailsScreen = ({route, navigation}) => {
   
@@ -15,12 +15,12 @@ const TodoDetailsScreen = ({route, navigation}) => {
   const dispatch = useDispatch();
 
   const deleteTodoHandler = (id) => { 
-    dispatch(deleteTodo(id));
+    dispatch(deleteTodoAction(id));
     navigation.goBack();
   }
 
   const updateTodoHandler = (text, id) => { 
-    dispatch(updateTodo(text, id));
+    dispatch(updateTodoAction(text, id));
     navigation.goBack();
   }
 

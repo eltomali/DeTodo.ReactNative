@@ -1,14 +1,21 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { FlatList, Text, TouchableOpacity } from "react-native";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import {loadTodosAction} from "../redux/actions";
 
 const TodoList = (props) => {
   const todos = useSelector((state) => state.todos);
+  console.log({todos});
+  const dispatch = useDispatch();
+  useEffect( () => {
+    dispatch(loadTodosAction() );
+  }, [dispatch]);
+
   return (
     <FlatList
       style={{ width: "80%" }}
       data={todos}
-      keyExtractor={(item, index) => index.toString()}
+      keyExtractor={item => item.id.toString()}
       renderItem={(itemData) => (
         <TouchableOpacity
           onPress={() =>

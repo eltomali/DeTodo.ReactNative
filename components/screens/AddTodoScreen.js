@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import { TextInput, View, Button, StyleSheet } from "react-native";
 import { useDispatch } from "react-redux";
-import { addTodo } from "../../redux/actions";
+import { addTodoAction } from "../../redux/actions";
 
 const AddTodo = ({navigation}) => {
   const [input, setInput] = useState("");
   const dispatch = useDispatch();
   const buttonHandler = () => {
     if (!input) return;
-    dispatch(addTodo(input));
+    dispatch(addTodoAction(input));
     setInput("");
     navigation.goBack();
   };
