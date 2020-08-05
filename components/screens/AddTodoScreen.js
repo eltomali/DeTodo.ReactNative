@@ -3,7 +3,7 @@ import { TextInput, View, Button, StyleSheet } from "react-native";
 import { useDispatch } from "react-redux";
 import { addTodoAction } from "../../redux/actions";
 
-const AddTodo = ({navigation}) => {
+const AddTodo = ({ navigation }) => {
   const [input, setInput] = useState("");
   const dispatch = useDispatch();
   const buttonHandler = () => {
@@ -28,12 +28,16 @@ const AddTodo = ({navigation}) => {
 
 export default AddTodo;
 
+export const screenOptions = {
+  headerTitle: ""
+};
+
 const styles = StyleSheet.create({
   container: {
-    marginTop: 30, 
-    marginHorizontal: 30
+    marginTop: 30,
+    marginHorizontal: 30,
   },
   addButton: {
-    marginTop: 20
-  }
+    marginTop: 20,
+  },
 });

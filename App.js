@@ -1,28 +1,41 @@
-import React from 'react';
-import { StyleSheet, View } from 'react-native';
-import { Provider } from 'react-redux';
-import {store, persistor} from './redux/store'
-import { PersistGate } from 'redux-persist/integration/react'
-import {init} from './helpers/db';
-import { TodoNavigator } from './navigation';
+import React from "react";
+import { StyleSheet, View } from "react-native";
+import { Provider } from "react-redux";
+import { store } from "./redux/store";
+import * as SQLite from "expo-sqlite";
 
-init()
-  .then(() => {
-    console.log("Initialized database");
-  })
-  .catch(err => {
-    console.log("Initializing db failed.");
-    console.log(err);
+import { TodoNavigator } from "./navigation";
+
+const db = SQLite.openDatabase("todos.db");
+
+const initDB = () => {
+  const promise = new Promise((resolve, reject) => {
+    db.transaction((tx) => {
+      tx.executeSql(
+        "CREATE TABLE IF NOT EXISTS todos (id INTEGER PRIMARY KEY NOT NULL, todo TEXT NOT NULL);",
+        [],
+        // success case
+        () => {
+          resolve();
+        },
+        // error case
+        (_, err) => {
+          reject(err);
+        }
+      );
+    });
   });
+  return promise;
+};
 
+initDB();
 
 export default function App() {
-   
   return (
     <Provider store={store}>
-        <View style={styles.container}>
-          <TodoNavigator />
-        </View>
+      <View style={styles.container}>
+        <TodoNavigator />
+      </View>
     </Provider>
   );
 }
