@@ -5,8 +5,8 @@ import {loadTodosAction} from "../redux/actions";
 
 const TodoList = (props) => {
   const todos = useSelector((state) => state.todos);
-  console.log({todos});
   const dispatch = useDispatch();
+  
   useEffect( () => {
     dispatch(loadTodosAction() );
   }, [dispatch]);

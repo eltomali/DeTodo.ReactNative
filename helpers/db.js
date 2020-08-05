@@ -4,7 +4,7 @@ const db = SQLite.openDatabase("todos.db");
 
 export const init = () => {
   const promise = new Promise((resolve, reject) => {
-    db.transaction(tx => {
+    db.transaction((tx) => {
       tx.executeSql(
         "CREATE TABLE IF NOT EXISTS todos (id INTEGER PRIMARY KEY NOT NULL, todo TEXT NOT NULL);",
         [],
@@ -12,7 +12,7 @@ export const init = () => {
         () => {
           resolve();
         },
-        // not success (error) case
+        // error case
         (_, err) => {
           reject(err);
         }
@@ -22,10 +22,9 @@ export const init = () => {
   return promise;
 };
 
-
 export const insertTodo = (todo) => {
   const promise = new Promise((resolve, reject) => {
-    db.transaction(tx => {
+    db.transaction((tx) => {
       tx.executeSql(
         "INSERT INTO todos (todo) VALUES (?)",
         [todo],
@@ -33,7 +32,7 @@ export const insertTodo = (todo) => {
         (_, result) => {
           resolve(result);
         },
-        // not success (error) case
+        // error case
         (_, err) => {
           reject(err);
         }
@@ -41,19 +40,19 @@ export const insertTodo = (todo) => {
     });
   });
   return promise;
-}
+};
 
 export const deleteTodo = (id) => {
   const promise = new Promise((resolve, reject) => {
-    db.transaction(tx => {
+    db.transaction((tx) => {
       tx.executeSql(
-        "DELETE FROM todos where id=?",
+        "DELETE FROM todos WHERE id=?",
         [id],
         // success case
         (_, result) => {
           resolve(result);
         },
-        // not success (error) case
+        // error case
         (_, err) => {
           reject(err);
         }
@@ -61,11 +60,31 @@ export const deleteTodo = (id) => {
     });
   });
   return promise;
-}
+};
+
+export const updateTodo = (todo, id) => {
+  const promise = new Promise((resolve, reject) => {
+    db.transaction((tx) => {
+      tx.executeSql(
+        "UPDATE todos SET todo=? WHERE id=?",
+        [todo, id],
+        // success case
+        (_, result) => {
+          resolve(result);
+        },
+        // error case
+        (_, err) => {
+          reject(err);
+        }
+      );
+    });
+  });
+  return promise;
+};
 
 export const fetchTodos = () => {
   const promise = new Promise((resolve, reject) => {
-    db.transaction(tx => {
+    db.transaction((tx) => {
       tx.executeSql(
         "SELECT * FROM todos",
         [],
@@ -73,7 +92,7 @@ export const fetchTodos = () => {
         (_, result) => {
           resolve(result);
         },
-        // not success (error) case
+        // error case
         (_, err) => {
           reject(err);
         }
@@ -81,4 +100,4 @@ export const fetchTodos = () => {
     });
   });
   return promise;
-}
+};
